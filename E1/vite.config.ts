@@ -15,4 +15,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: "dist", // 👈 Tells Vercel where the built files go
+  },
+  // 👇 This ensures React Router works on Vercel (404 fix)
+  preview: {
+    port: 4173,
+    strictPort: true,
+  },
 }));
+
