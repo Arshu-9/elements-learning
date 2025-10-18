@@ -3,12 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
@@ -16,12 +11,14 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: "dist", // 👈 Tells Vercel where the built files go
+    outDir: "dist",
   },
-  // 👇 This ensures React Router works on Vercel (404 fix)
+  server: {
+    host: "::",
+    port: 8080,
+  },
   preview: {
     port: 4173,
-    strictPort: true,
   },
 }));
 
